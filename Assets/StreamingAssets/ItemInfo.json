@@ -1,0 +1,60 @@
+{
+  "info": [
+    {
+      "id": 1,
+      "name": "匕首",
+      "icon": "26_22110026",
+      "type": 1,
+      "stackCount": 1,
+      "tips": "锋利无比的刺客匕首"
+    },
+    {
+      "id": 2,
+      "name": "头盔",
+      "icon": "28_22140028",
+      "type": 1,
+      "stackCount": 1,
+      "tips": "平平无奇的战士头盔"
+    },
+    {
+      "id": 3,
+      "name": "弓箭",
+      "icon": "Bow",
+      "type": 1,
+      "stackCount": 1,
+      "tips": "平平无奇的猎人弩箭"
+    },
+    {
+      "id": 4,
+      "name": "红药",
+      "icon": "6_31100006",
+      "type": 2,
+      "stackCount": 99,
+      "tips": "恢复生命值"
+    },
+    {
+      "id": 5,
+      "name": "蓝药",
+      "icon": "8_31100009",
+      "type": 2,
+      "stackCount": 99,
+      "tips": "恢复魔法值"
+    },
+    {
+      "id": 6,
+      "name": "红宝石",
+      "icon": "5",
+      "type": 3,
+      "stackCount": 99,
+      "tips": "价值不菲的红宝石"
+    },
+    {
+      "id": 7,
+      "name": "蓝宝石",
+      "icon": "6",
+      "type": 3,
+      "stackCount": 99,
+      "tips": "价值不菲的蓝宝石"
+    }
+  ]
+}

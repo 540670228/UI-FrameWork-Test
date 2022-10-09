@@ -36,7 +36,7 @@ namespace Common
                     //如果创建对象，则会在创建时调用其身上脚本的Awake即调用T的Awake(T的Awake实际上是继承的父类的）
                     //所以此时无需为instance赋值，其会在Awake中赋值，自然也会初始化所以无需init()
                     /*instance = */
-                    new GameObject("Singleton of "+typeof(T)).AddComponent<T>();
+                    new GameObject("Singleton_"+typeof(T)).AddComponent<T>();
                 }
                 else instance.Init(); //保证Init只执行一次
 

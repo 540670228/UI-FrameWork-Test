@@ -1,28 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
+using UnityEngine.Events;
 
 namespace Common
 {
     ///<summary>
     ///资源加载管理类
     ///<summary>
-    public class ResourcesManager
+    public class ResourcesManager : MonoSingleton<ResourcesManager>
     {
-        //负责储存预制件的名字和路径映射
-        private static Dictionary<string, string> prefabConfigMap;
+        //负责储存资源的名字和路径映射
+        private static Dictionary<string, string> configMap;
 
-        //静态构造函数
-        //作用：初始化类的静态数据成员
-        //时机：类被加载（第一次调用）时调用一次
-        static ResourcesManager()
+        //缓存已经加载的资源
+        private static Dictionary<string, object> cacheDic;
+
+        protected override void Init()
         {
+            base.Init();
             //加载文件
             string fileContent = ConfigReader.GetConfigFile("ConfigMap.txt");
 
-            prefabConfigMap = new Dictionary<string, string>();
+            configMap = new Dictionary<string, string>();
+
+            cacheDic = new Dictionary<string, object>();
 
             //解析文件（string ----> prefabConfigMap)
             ConfigReader.Reader(fileContent, BuildMap);
@@ -32,35 +34,71 @@ namespace Common
         /// 负责处理解析每行字符串的功能
         /// </summary>
         /// <param name="line">每行字符串</param>
-        private static void BuildMap(string line)
+        private void BuildMap(string line)
         {
             string[] keyValue = line.Split('=');
-            prefabConfigMap.Add(keyValue[0], keyValue[1]);
-
+            if(configMap.ContainsKey(keyValue[0]))
+            {
+                Debug.Log($"Resources have the same name {keyValue[0]}");
+                return;
+            }
+            configMap.Add(keyValue[0], keyValue[1]);
         }
 
 
-
-
-
         /// <summary>
-        /// 加载预制件
+        /// 同步加载资源
         /// </summary>
         /// <typeparam name="T">加载资源类型</typeparam>
-        /// <param name="prefabName">预制件名称</param>
+        /// <param name="resourceName">资源名称</param>
         /// <returns></returns>
-        public static T Load<T>(string prefabName)where T:Object
+        public T Load<T>(string resourceName)where T:Object
         {
             //从字典中获取路径加载预制件
-            if (prefabConfigMap.ContainsKey(prefabName))
+            if (configMap.ContainsKey(resourceName))
             {
-                return Resources.Load<T>(prefabConfigMap[prefabName]);
+                string resourceKey = $"{resourceName}_{typeof(T)}";
+                if (!cacheDic.ContainsKey(resourceKey))
+                {
+                    T res = Resources.Load<T>(configMap[resourceName]);
+                    cacheDic.Add(resourceKey, res);
+                }    
+                return cacheDic[resourceKey] as T;
+
             }
             else return default(T);
         }
 
 
-        
+        /// <summary>
+        /// 异步加载资源
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="resourceName"></param>
+        /// <param name="action"></param>
+        public void LoadAsync<T>(string resourceName,UnityAction<T> action = null) where T : Object
+        {
+            StartCoroutine(LoadAsyncCore<T>(resourceName, action));
+        }
+        private IEnumerator LoadAsyncCore<T>(string resourceName, UnityAction<T> action) where T : Object
+        {
+            if (configMap.ContainsKey(resourceName))
+            {
+                string resourceKey = $"{resourceName}_{typeof(T)}";
+                if (!cacheDic.ContainsKey(resourceKey))
+                {
+                    ResourceRequest request = Resources.LoadAsync<T>(configMap[resourceName]);
+                    yield return request;
+                    //由于采用异步协程，需要二重判断
+                    if (!cacheDic.ContainsKey(resourceKey))
+                        cacheDic.Add(resourceKey, request.asset as T);
+                }
+                action?.Invoke(cacheDic[resourceKey] as T);
+
+            }
+            else action?.Invoke(default(T));
+        }
+
     }
 
 }

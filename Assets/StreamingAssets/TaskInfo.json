@@ -1,0 +1,56 @@
+{
+  "info": [
+    {
+      "id": 1,
+      "taskName": "收集药品",
+      "taskTips": "麻烦帮珍妮收集10份红药和蓝药",
+      "taskType": 1,
+      "targetList": [
+        {
+          "id": 4,
+          "num": 10
+        },
+        {
+          "id": 5,
+          "num": 10
+        }
+      ],
+      "rewardList": [
+        {
+          "id": 6,
+          "num": 1
+        },
+        {
+          "id": 7,
+          "num": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "taskName": "收集宝石",
+      "taskTips": "麻烦帮汤姆收集一块蓝宝石和红宝石",
+      "taskType": 1,
+      "targetList": [
+        {
+          "id": 6,
+          "num": 1
+        },
+        {
+          "id": 7,
+          "num": 1
+        }
+      ],
+      "rewardList": [
+        {
+          "id": 4,
+          "num": 10
+        },
+        {
+          "id": 5,
+          "num": 10
+        }
+      ]
+    }
+  ]
+}

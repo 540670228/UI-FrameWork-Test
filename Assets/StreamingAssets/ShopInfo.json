@@ -1,0 +1,81 @@
+{
+  "info": [
+    {
+      "id": 1,
+      "itemInfo": {
+        "id": 4,
+        "num": 10
+      },
+      "priceType": 1,
+      "priceIcon": "Tex_Gold_2.0",
+      "price": 100,
+      "tips": "一组红药，冒险必备"
+    },
+    {
+      "id": 2,
+      "itemInfo": {
+        "id": 5,
+        "num": 10
+      },
+      "priceType": 1,
+      "priceIcon": "Tex_Gold_2.0",
+      "price": 100,
+      "tips": "一组蓝药，冒险必备"
+    },
+    {
+      "id": 3,
+      "itemInfo": {
+        "id": 6,
+        "num": 1
+      },
+      "priceType": 2,
+      "priceIcon": "Tex_Diamond_2.0",
+      "price": 200,
+      "tips": "红宝石，强化武器装备的基础材料"
+    },
+    {
+      "id": 4,
+      "itemInfo": {
+        "id": 7,
+        "num": 1
+      },
+      "priceType": 2,
+      "priceIcon": "Tex_Diamond_2.0",
+      "price": 200,
+      "tips": "蓝宝石，强化武器装备的基础材料"
+    },
+    {
+      "id": 5,
+      "itemInfo": {
+        "id": 1,
+        "num": 1
+      },
+      "priceType": 1,
+      "priceIcon": "Tex_Gold_2.0",
+      "price": 500,
+      "tips": "平平无奇的匕首，提升攻击力"
+    },
+    {
+      "id": 6,
+      "itemInfo": {
+        "id": 2,
+        "num": 1
+      },
+      "priceType": 1,
+      "priceIcon": "Tex_Gold_2.0",
+      "price": 500,
+      "tips": "平平无奇的头盔，提升防御力"
+    },
+    {
+      "id": 7,
+      "itemInfo": {
+        "id": 3,
+        "num": 1
+      },
+      "priceType": 1,
+      "priceIcon": "Tex_Gold_2.0",
+      "price": 500,
+      "tips": "平平无奇的弩箭，远程攻击"
+    }
+  ]
+}
